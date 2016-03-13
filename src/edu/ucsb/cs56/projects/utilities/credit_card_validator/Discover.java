@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Discover {
 	public static String cardNumber;
-
+        public static final int VALIDLENGTH  = 16;
 	/** Generates card number for this type of card
     * @return String representation of a Discover credit card number
     */

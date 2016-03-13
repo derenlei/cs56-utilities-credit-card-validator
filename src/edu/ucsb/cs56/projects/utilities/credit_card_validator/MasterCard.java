@@ -9,7 +9,7 @@ import java.util.*;
 */
 public class MasterCard {
 	public static String cardNumber;
-	
+        public static final int VALIDLENGTH = 16;
 	/** Generates card number for this type of card
     * @return String representation of a MasterCard credit card number
     */

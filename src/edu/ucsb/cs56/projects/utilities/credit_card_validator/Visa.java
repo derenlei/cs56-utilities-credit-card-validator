@@ -9,7 +9,7 @@ import java.util.*;
 */
 public class Visa {
 	public static String cardNumber;
-
+        public static final int VALIDLENGTH  = 16; 
 	public static String generateCard() {
 		String temp = new String();
 		String newCard = new String();
