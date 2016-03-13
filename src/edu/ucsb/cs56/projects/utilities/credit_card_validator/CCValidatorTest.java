@@ -26,6 +26,10 @@ public class CCValidatorTest {
 	String testCard3 = "4200000000000000";
 	result = CCValidator.isValid(testCard3);
 	assertEquals(true, result);
+
+	String testCard4 = "6011768593893031";
+	result = CCValidator.isValid(testCard4);
+	assertEquals(true,result);
     }
 
     /*
@@ -49,5 +53,26 @@ public class CCValidatorTest {
 	String testCard7 = "4200-0000-0000-0000";
 	result = CCValidator.isValid(testCard7);
 	assertEquals(true, result);
+    }
+    /*
+      test getCardType method to return proper card type when given string of digits
+    */
+    @Test public void testCardType(){
+
+	String card1 = "4716726695773496";
+	String cardType = CCValidator.getCardType(card1);
+	assertEquals("Visa",cardType);
+
+	String card2 = "5231547739098168";
+	cardType = CCValidator.getCardType(card2);
+	assertEquals("Mastercard",cardType);
+	
+	String card3 = "342138952685308";
+	cardType = CCValidator.getCardType(card3);
+	assertEquals("Amex",cardType);
+
+	String card4 = "6011768593893031";
+	cardType = CCValidator.getCardType(card4);
+	assertEquals("Discover",cardType);
     }
 }
