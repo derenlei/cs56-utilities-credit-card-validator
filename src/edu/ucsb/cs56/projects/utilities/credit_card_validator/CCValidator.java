@@ -96,6 +96,7 @@ public class CCValidator {
 	* Check for card type based on first couple digits:
 	* visas start in 4, mastercards are 51-55, etc
 	* @param cardNumber String representation of credit card number
+	* @return string valuae that tells what bank the card belongs to
 	*/
 	public static String getCardType(String cardNumber){
 
