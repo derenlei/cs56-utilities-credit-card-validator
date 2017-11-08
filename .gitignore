@@ -4,3 +4,4 @@ build/
 *~
 .ant-targets-build.xml
 *.DS_Store
+.gradle
