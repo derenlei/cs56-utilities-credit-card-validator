@@ -3,8 +3,8 @@ apply plugin:'application'
 
 mainClassName = "edu.ucsb.cs56.projects.utilities.credit_card_validator.HelloWorld"
 sourceSets.main.java.srcDirs = ['src']
-sourceCompatibility = '1.7'
-targetCompatibility = '1.7'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 version = '1.0'
 
 jar {
