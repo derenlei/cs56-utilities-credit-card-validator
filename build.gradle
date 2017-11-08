@@ -3,8 +3,9 @@ apply plugin:'application'
 
 mainClassName = "edu.ucsb.cs56.projects.utilities.credit_card_validator.HelloWorld"
 sourceSets.main.java.srcDirs = ['src']
-sourceCompatibility = 1.7
-version = '4.2.1'
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+version = '1.0'
 
 jar {
     manifest {
