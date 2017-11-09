@@ -4,29 +4,18 @@ import static spark.Spark.*;
 
 public class WebMenu {
     public static void main(String[] args) {
-	get("/hello", new Route() {
-		@Override
-		public Object handle(Request request, Response response) {
-		    return "Hello World";
-		}
-	    });
-	
-	get("/CCValidator/:cardNumber", new Route(){
-		@Override
-		public Object handle(Request request, Response response){
-		    String cardNumber = request.params(":cardNumber");
-		    Boolean isValid = CCValidator.isValid(cardNumber);
-		    if(isValid){
-			String cardType = CCValidator.getCardType(cardNumber);
-			return cardNumber + " is a valid " + cardType;
-			
-		    }
-		    else{
-			return cardNumber  + " is not valid";
-			}
-		}
-	    });
-	
+	WebMenu webMenu = new WebMenu();
+	webMenu.createMenu();
+	webMenu.helloWorld();
+	webMenu.validateByCardNum();
+	webMenu.generateMasterCard();
+	webMenu.generateVisa();
+	webMenu.generateDiscover();
+	webMenu.generateAE();
+	webMenu.validate();
+    }
+
+    private void createMenu(){
        	get("/menu", (request, response) ->
 	   "<!DOCTYPE html>" +
 	    "<html>" +
@@ -44,7 +33,69 @@ public class WebMenu {
 	    "</body>" +
 	    "</html>"
 	    );
+    }
 
+    private void helloWorld(){
+	get("/hello", new Route() {
+		@Override
+		public Object handle(Request request, Response response) {
+		    return "Hello World";
+		}
+	    });
+    }
+
+    private void validateByCardNum(){
+	get("/CCValidator/:cardNumber", new Route(){
+		@Override
+		public Object handle(Request request, Response response){
+		    String cardNumber = request.params(":cardNumber");
+		    Boolean isValid = CCValidator.isValid(cardNumber);
+		    return checkValid(isValid,cardNumber);
+		}
+	    });
+    }
+
+    private void generateMasterCard(){
+	get("/generateCard/MasterCard", new Route() {
+		@Override
+		public Object handle(Request request, Response response) {
+		    String GenCard = MasterCard.generateCard();
+		    return GenCard;
+		}
+	    });
+    }
+
+    private void generateVisa(){
+	get("/generateCard/Visa", new Route() {
+		@Override
+		public Object handle(Request request, Response response) {
+		    String GenCard = Visa.generateCard();
+		    return GenCard;
+		}
+	    });
+    }
+
+    private void generateDiscover(){
+    	get("/generateCard/Discover", new Route() {
+		@Override
+		public Object handle(Request request, Response response) {
+		    String GenCard = Discover.generateCard();
+		    return GenCard;
+		}
+	    });
+    }
+
+    private void generateAE(){
+    	get("/generateCard/AmericanExpress", new Route() {
+		@Override
+		public Object handle(Request request, Response response) {
+		    String GenCard = AmericanExpress.generateCard();
+		    return GenCard;
+		}
+	    });
+    }
+
+    private void validate(){
 	post("/CCValidator", new Route() {
 		@Override
 		public Object handle(Request request, Response response) {
@@ -53,48 +104,18 @@ public class WebMenu {
 			cardNumber = request.queryParams("cardNumber");
 		    }catch(Exception e){}
 		    Boolean isValid = CCValidator.isValid(cardNumber);
-		    if(isValid){
-			String cardType = CCValidator.getCardType(cardNumber);
-			return cardNumber + " is a valid " + cardType;
-		    }
-		    else{
-			return cardNumber  + " is not valid";
-			}
+		    return checkValid(isValid,cardNumber);
 		}
 	    });
+    }
 
-
-	
-	get("/generateCard/MasterCard", new Route() {
-		@Override
-		public Object handle(Request request, Response response) {
-		    String GenCard = MasterCard.generateCard();
-		    return GenCard;
-		}
-	    });
-
-	get("/generateCard/Visa", new Route() {
-		@Override
-		public Object handle(Request request, Response response) {
-		    String GenCard = Visa.generateCard();
-		    return GenCard;
-		}
-	    });
-	
-	get("/generateCard/Discover", new Route() {
-		@Override
-		public Object handle(Request request, Response response) {
-		    String GenCard = Discover.generateCard();
-		    return GenCard;
-		}
-	    });
-	
-	get("/generateCard/AmericanExpress", new Route() {
-		@Override
-		public Object handle(Request request, Response response) {
-		    String GenCard = AmericanExpress.generateCard();
-		    return GenCard;
-		}
-	    });
+    private String checkValid(Boolean isValid, String cardNumber){
+	if(isValid){
+	    String cardType = CCValidator.getCardType(cardNumber);
+	    return cardNumber + " is a valid " + cardType;
+	}
+	else{
+	    return cardNumber  + " is not valid";
+	}
     }
 }
