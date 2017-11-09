@@ -13,6 +13,7 @@ public class CCValidator {
     public static boolean isValid(String cardNumber) {
 		cardNumber = cardNumber.replace(" ", "");
 		cardNumber = cardNumber.replace("-","");
+		if(cardNumber.length() != 16) { return false; }
     	String reversedNumber = new StringBuilder(cardNumber).reverse().toString();
     	char [] reversedDigitArray = reversedNumber.toCharArray();
 	/*

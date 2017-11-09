@@ -10,6 +10,7 @@ public class WebMenu {
 		    return "Hello World";
 		}
 	    });
+	
 	get("/CCValidator/:cardNumber", new Route(){
 		@Override
 		public Object handle(Request request, Response response){
@@ -25,7 +26,8 @@ public class WebMenu {
 			}
 		}
 	    });
-       	get("/generateCard", (request, response) ->
+	
+       	get("/menu", (request, response) ->
 	   "<!DOCTYPE html>" +
 	    "<html>" +
 	    "<body>" +
@@ -34,9 +36,35 @@ public class WebMenu {
 	    "<p><a href= '/generateCard/Visa'>Visa</a></p>" +
 	    "<p><a href= '/generateCard/Discover'>Discover</a></p>" +
 	    "<p><a href= '/generateCard/AmericanExpress'>AmericanExpress</a></p>" +
+	    "<form action='/CCValidator' method='post' target='blank'>" +
+	    "<h1>Validate Credit Card</h1>" +
+	    "Credit Card Number: <input type='text' name='cardNumber' id='cardNumber'><br>" +
+	    "<input type='submit' value='Submit'> " +
+	    "</form>" +
 	    "</body>" +
 	    "</html>"
 	    );
+
+	post("/CCValidator", new Route() {
+		@Override
+		public Object handle(Request request, Response response) {
+		    String cardNumber = "NULL";
+		    try{
+			cardNumber = request.queryParams("cardNumber");
+		    }catch(Exception e){}
+		    Boolean isValid = CCValidator.isValid(cardNumber);
+		    if(isValid){
+			String cardType = CCValidator.getCardType(cardNumber);
+			return cardNumber + " is a valid " + cardType;
+		    }
+		    else{
+			return cardNumber  + " is not valid";
+			}
+		}
+	    });
+
+
+	
 	get("/generateCard/MasterCard", new Route() {
 		@Override
 		public Object handle(Request request, Response response) {
