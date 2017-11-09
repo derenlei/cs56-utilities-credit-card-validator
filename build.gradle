@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin:'application'
 
-mainClassName = "edu.ucsb.cs56.projects.utilities.credit_card_validator.HelloWorld"
+mainClassName = "edu.ucsb.cs56.projects.utilities.credit_card_validator.WebMenu"
 sourceSets.main.java.srcDirs = ['src']
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
