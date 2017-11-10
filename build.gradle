@@ -5,7 +5,7 @@ mainClassName = "edu.ucsb.cs56.projects.utilities.credit_card_validator.WebMenu"
 sourceSets.main.java.srcDirs = ['src']
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
-version = '1.0'
+version = '2.10'
 
 jar {
     manifest {
@@ -23,6 +23,12 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.+'
     compile fileTree(dir: 'lib', include: ['*.jar'])
     compile "com.sparkjava:spark-core:2.7.0"
+}
+
+task stage(dependsOn: ['clean', 'installApp'])
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.10'
 }
 
 test {
