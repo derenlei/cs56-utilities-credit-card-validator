@@ -4,7 +4,7 @@ import static spark.Spark.*;
 
 public class WebMenu {
     public static void main(String[] args) {
-      setPort(Integer.parseInt(System.getEnv("PORT"));
+      setPort(Integer.parseInt(System.getEnv("PORT")));
 	WebMenu webMenu = new WebMenu();
 	webMenu.createMenu();
 	webMenu.helloWorld();
